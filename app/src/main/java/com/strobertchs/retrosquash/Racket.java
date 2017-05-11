@@ -1,18 +1,13 @@
 package com.strobertchs.retrosquash;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 
 /**
  * Created by eric on 2017-05-08.
  */
 public class Racket extends AnimatedSprite {
-    //private int height;
-    //private int width;
-    //private Point position;
-    //private Paint paint;
-    //private boolean movingLeft;
-    //private boolean movingRight;
-    //private int horizontal_amount;
+
 
 
     public Racket(int screen_width, int screen_height){
@@ -28,7 +23,6 @@ public class Racket extends AnimatedSprite {
 
 
     }
-
 
     /**
      * stop horizontal movement

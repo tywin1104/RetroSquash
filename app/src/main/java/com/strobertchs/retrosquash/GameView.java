@@ -56,7 +56,7 @@ class GameView extends SurfaceView implements Runnable{
         ourHolder = getHolder();
         paint = new Paint();
 
-        ball = new Ball(screenWidth);
+        ball = new Ball(context, screenWidth);
         ball.moveDown();  // initialize ball to move downwards;
         racket = new Racket(sScreenWidth, sScreenHeight);
 
