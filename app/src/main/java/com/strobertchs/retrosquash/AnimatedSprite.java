@@ -14,7 +14,7 @@ public abstract class AnimatedSprite extends Sprite {
     private int down_amount;        // how much the ball moves upward
 
     /**
-     * Constructor - just calls the the parent constructor
+     * Constructor - just calls the parent constructor
      */
     public AnimatedSprite(){
         super();

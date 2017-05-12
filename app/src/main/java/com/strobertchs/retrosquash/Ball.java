@@ -42,22 +42,29 @@ public class Ball extends AnimatedSprite {
         setUp_amount(10);             // default up_amount to 10
         setDown_amount(6);            // default down_amount to be 6
 
-        bitmap = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.asteroidsingle);
+        //bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroidsingle);
 
         frameHeight = bitmap.getHeight();
         frameWidth = bitmap.getWidth();
 
-        /*
+
         asteroids = new ArrayList<Bitmap>();
         asteroids.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid1));
         asteroids.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid2));
         asteroids.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid3));
         asteroids.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid4));
         numFrames = asteroids.size();
-        */
 
 
+    }
+
+
+    /**
+     * turn off horizontal movement flags
+     */
+    public void moveStraight(){
+        setMovingLeft(false);
+        setMovingRight(false);
     }
 
     /**
@@ -81,7 +88,11 @@ public class Ball extends AnimatedSprite {
 
         }
 
-        //which frame should we draw
+        //advance the frame count
+        frameNumber++;
+
+        // this code below was for computing a source rect for a multi-image sprite sheet
+        // Android scaling of the source image made this really buggy, so lets not use it
         /*
         int animframeX = frameWidth*(frameNumber%framesPerRow);
         int animframeY = (frameNumber%numFrames)/framesPerRow * frameHeight;
@@ -97,11 +108,6 @@ public class Ball extends AnimatedSprite {
 
         System.out.println("srcRect: " + rectToBeDrawn.toString());
          */
-
-        //now the next frame
-        //frameNumber++;
-
-
     }
 
 
@@ -111,7 +117,7 @@ public class Ball extends AnimatedSprite {
      */
     public void draw(Canvas source_canvas){
 
-
+        // compute the rectangle to draw the image to
         Rect destRect = new Rect(getPositionX(),
                 getPositionY(),
                 getPositionX() + getWidth(),
@@ -119,18 +125,9 @@ public class Ball extends AnimatedSprite {
 
         //System.out.println("destRect: " + destRect.toString());
 
-
-        source_canvas.drawBitmap(bitmap, null, destRect, null);
-        //source_canvas.drawBitmap(asteroids.get(frameNumber%numFrames), null, destRect, null);
+        //source_canvas.drawBitmap(bitmap, null, destRect, null);  //show a single image
+        source_canvas.drawBitmap(asteroids.get(frameNumber%numFrames), null, destRect, null);  //show a frame in the animation
     }
-
-    public void moveStraight(){
-        setMovingLeft(false);
-        setMovingRight(false);
-    }
-
-
-
 
 
 
