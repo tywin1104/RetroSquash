@@ -42,7 +42,7 @@ public class Ball extends AnimatedSprite {
         setUp_amount(10);             // default up_amount to 10
         setDown_amount(6);            // default down_amount to be 6
 
-        //bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroidsingle);
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid1);
 
         frameHeight = bitmap.getHeight();
         frameWidth = bitmap.getWidth();
