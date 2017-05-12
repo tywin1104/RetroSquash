@@ -22,7 +22,7 @@ public class Ball extends AnimatedSprite {
     protected int numFrames;
     protected int framesPerRow;
     protected Rect rectToBeDrawn;
-    private ArrayList<Bitmap> asteroids;
+    protected ArrayList<Bitmap> asteroids;
 
 
 
