@@ -8,7 +8,8 @@ public abstract class AnimatedSprite extends Sprite {
     private boolean movingLeft;     // left flag
     private boolean movingRight;    // right flag
     private boolean movingUp;       // up flag
-    private boolean movingDown;     // down flag
+    private boolean movingDown;
+    // down flag
     private int horizontal_amount;  // how much the ball moves along the horizontal axis
     private int up_amount;          // how much the ball moves downward
     private int down_amount;        // how much the ball moves upward
