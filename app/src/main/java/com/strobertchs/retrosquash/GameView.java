@@ -29,6 +29,7 @@ class GameView extends SurfaceView implements Runnable{
     Paint paint;
     Ball ball;
     Racket racket;
+    Brick brick;
 
     long lastFrameTime;
     int fps;
@@ -60,6 +61,7 @@ class GameView extends SurfaceView implements Runnable{
         ball.moveDown();  // initialize ball to move downwards;
         racket = new Racket(sScreenWidth, sScreenHeight);
 
+        brick = new Brick(screenWidth);
         lives = 3;
         score = 0;
 
@@ -235,6 +237,8 @@ class GameView extends SurfaceView implements Runnable{
 
             //Draw the ball
             ball.draw(canvas);
+            //Draw the brick
+            brick.draw(canvas);
             ourHolder.unlockCanvasAndPost(canvas);
         }
     }
