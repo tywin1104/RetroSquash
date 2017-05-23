@@ -215,6 +215,46 @@ class GameView extends SurfaceView implements Runnable{
                 }
             }
         }
+        //Has ball hit the brick
+            //from top
+        if(ball.getPositionY() + ball.getWidth() == brick.getPositionY() && ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth())
+            //make sound
+            ball.moveUp();
+            if(ball.getPositionX() > brick.getPositionX() + brick.getWidth()/2) {
+                ball.moveRight();
+            }   else {
+                ball.moveLeft();
+        }
+            //from bottom
+        if(ball.getPositionY() + ball.getWidth() == brick.getPositionY()+ brick.getHeight() && ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth())
+            //make sound
+            ball.moveDown();
+        if(ball.getPositionX() > brick.getPositionX() + brick.getWidth()/2) {
+            ball.moveRight();
+        }   else {
+            ball.moveLeft();
+        }
+
+        //from left
+        if(ball.getPositionX() + ball.getWidth() == brick.getPositionX() && ball.getPositionY()+ ball.getHeight()> brick.getPositionY() && ball.getPositionY() < brick.getPositionY()+brick.getHeight()) {
+            ball.moveLeft();
+            //make sound
+            if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
+                ball.moveDown();
+            } else {
+                ball.moveUp();
+            }
+        }
+        // from right
+        if(ball.getPositionX() + ball.getWidth() == brick.getPositionX() + brick.getWidth() && ball.getPositionY()+ ball.getHeight()> brick.getPositionY() && ball.getPositionY() < brick.getPositionY()+brick.getHeight()) {
+            ball.moveRight();
+            //make sound
+            if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
+                ball.moveDown();
+            } else {
+                ball.moveUp();
+            }
+        }
 
         //update position of ball based on current direction
         ball.updatePosition();
