@@ -215,30 +215,30 @@ class GameView extends SurfaceView implements Runnable{
                 }
             }
         }
-        //Has ball hit the brick
-            //from top
-        if(ball.getPositionY() + ball.getWidth() == brick.getPositionY() && ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth())
-            //make sound
+        //Has the ball hit brick
+        if (ball.getPositionY() + ball.getWidth() >= brick.getPositionY() && ball.getPositionY() + ball.getWidth() <= brick.getPositionY() + brick.getHeight() / 2 && ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX() <= brick.getPositionX() + brick.getWidth())
+        {   soundPool.play(sample1, 1, 1, 0, 0, 1);
             ball.moveUp();
-            if(ball.getPositionX() > brick.getPositionX() + brick.getWidth()/2) {
+            if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
                 ball.moveRight();
-            }   else {
+            } else {
                 ball.moveLeft();
+            }
         }
-            //from bottom
-        if(ball.getPositionY() + ball.getWidth() == brick.getPositionY()+ brick.getHeight() && ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth())
-            //make sound
+        //from bottom
+        if(ball.getPositionY() <= brick.getPositionY()+ brick.getHeight() &&ball.getPositionY() >=brick.getPositionY()+ brick.getHeight()/2&& ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth()) {    //make sound
+            soundPool.play(sample1, 1, 1, 0, 0, 1);
             ball.moveDown();
-        if(ball.getPositionX() > brick.getPositionX() + brick.getWidth()/2) {
-            ball.moveRight();
-        }   else {
-            ball.moveLeft();
+            if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
+                ball.moveRight();
+            } else {
+                ball.moveLeft();
+            }
         }
-
         //from left
-        if(ball.getPositionX() + ball.getWidth() == brick.getPositionX() && ball.getPositionY()+ ball.getHeight()> brick.getPositionY() && ball.getPositionY() < brick.getPositionY()+brick.getHeight()) {
+        if(ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX()+ball.getWidth() <= brick.getPositionX()+ brick.getWidth()/2&& ball.getPositionY()+ ball.getHeight()>= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY()+brick.getHeight()) {
             ball.moveLeft();
-            //make sound
+            soundPool.play(sample1, 1, 1, 0, 0, 1);
             if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
                 ball.moveDown();
             } else {
@@ -246,16 +246,15 @@ class GameView extends SurfaceView implements Runnable{
             }
         }
         // from right
-        if(ball.getPositionX() + ball.getWidth() == brick.getPositionX() + brick.getWidth() && ball.getPositionY()+ ball.getHeight()> brick.getPositionY() && ball.getPositionY() < brick.getPositionY()+brick.getHeight()) {
+        if(ball.getPositionX() <= brick.getPositionX()+ brick.getWidth() && ball.getPositionX() > brick.getPositionX()+ brick.getWidth() && ball.getPositionY()+ ball.getHeight()>= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY()+brick.getHeight()) {
             ball.moveRight();
-            //make sound
+            soundPool.play(sample1, 1, 1, 0, 0, 1);
             if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
                 ball.moveDown();
             } else {
                 ball.moveUp();
             }
         }
-
         //update position of ball based on current direction
         ball.updatePosition();
 

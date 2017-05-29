@@ -13,16 +13,17 @@ import android.graphics.Rect;
 public class Brick extends Sprite {
     public Brick(int screen_width){
         super();
-        setPositionX((int)(screen_width/(Math.random()*8+1)));
-        setPositionX((int)(screen_width/(Math.random()*8+1)));
-        setWidth((int)(screen_width/(Math.random()*8+1)));
+        setPositionX((int)(screen_width/+ (Math.random()*8+1)));
+        setPositionY((int)(screen_width/(Math.random()*8+1)));
+        setWidth((int)(screen_width/(Math.random()*14+1)));
         setHeight((int)(screen_width/(Math.random()*8+1)));
     }
     @Override
     public void draw(Canvas canvas) {
-            Rect destRect = new Rect(getPositionX(),
-                    getPositionY(),
-                    getPositionX() + getWidth(),
-                    getPositionY() + getWidth());
+        canvas.drawRect(getPositionX(),
+                getPositionY(),
+                getPositionX() + getWidth(),
+                getPositionY() + getHeight(),
+                paint);
     }
 }
