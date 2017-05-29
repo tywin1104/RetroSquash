@@ -28,15 +28,16 @@ class GameView extends SurfaceView implements Runnable{
     volatile boolean playingSquash;
     Paint paint;
     Ball ball;
-    Racket racket;
+//    Racket racket;
+    RacketWithImage racket;
     Brick brick;
 
     long lastFrameTime;
     int fps;
     int score;
     int lives;
-    int screenWidth;
-    int screenHeight;
+    public int screenWidth;
+    public int screenHeight;
 
     //Sound variables
     private SoundPool soundPool;
@@ -59,9 +60,11 @@ class GameView extends SurfaceView implements Runnable{
 
         ball = new Ball(context, screenWidth);
         ball.moveDown();  // initialize ball to move downwards;
-        racket = new Racket(sScreenWidth, sScreenHeight);
+//        racket = new Racket(sScreenWidth, sScreenHeight);
+        racket = new RacketWithImage(context, sScreenWidth, sScreenHeight);
 
-        brick = new Brick(screenWidth);
+
+        brick = new Brick(context,screenWidth);
         lives = 3;
         score = 0;
 

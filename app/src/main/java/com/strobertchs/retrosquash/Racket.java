@@ -1,5 +1,8 @@
 package com.strobertchs.retrosquash;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
@@ -9,8 +12,8 @@ import android.graphics.Color;
 public class Racket extends AnimatedSprite {
 
 
-
-    public Racket(int screen_width, int screen_height){
+    private Bitmap bitmap;
+    public Racket( int screen_width, int screen_height){
 
         super(); //Constructor from Sprite
 
