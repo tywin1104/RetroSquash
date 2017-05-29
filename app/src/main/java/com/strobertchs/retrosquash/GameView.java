@@ -14,6 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -32,6 +33,7 @@ class GameView extends SurfaceView implements Runnable{
 //    Racket racket;
     RacketWithImage racket;
     Brick brick;
+    ArrayList<Brick> bricks;
 
     long lastFrameTime;
     int fps;
@@ -53,6 +55,10 @@ class GameView extends SurfaceView implements Runnable{
     public GameView(Context context, int sScreenWidth, int sScreenHeight) {
 
         super(context);
+        bricks = new ArrayList<>();
+        for(int i=0;i<3;i++) {
+            bricks.add(new Brick(context, sScreenWidth));
+        }
 
         screenWidth = sScreenWidth;
         screenHeight = sScreenHeight;
@@ -220,50 +226,102 @@ class GameView extends SurfaceView implements Runnable{
             }
         }
         //Has the ball hit brick
-        if (ball.getPositionY() + ball.getWidth() >= brick.getPositionY() && ball.getPositionY() + ball.getWidth() <= brick.getPositionY() + brick.getHeight() / 2 && ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX() <= brick.getPositionX() + brick.getWidth())
-        {   soundPool.play(sample1, 1, 1, 0, 0, 1);
-            ball.moveUp();
-            if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
-                ball.moveRight();
-            } else {
-                ball.moveLeft();
-            }
+//        if (ball.getPositionY() + ball.getWidth() >= brick.getPositionY() && ball.getPositionY() + ball.getWidth() <= brick.getPositionY() + brick.getHeight() / 2 && ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX() <= brick.getPositionX() + brick.getWidth())
+//        {   soundPool.play(sample1, 1, 1, 0, 0, 1);
+//            ball.moveUp();
+//            if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
+//                ball.moveRight();
+//            } else {
+//                ball.moveLeft();
+//            }
+//        }
+//        //from bottom
+//        if(ball.getPositionY() <= brick.getPositionY()+ brick.getHeight() &&ball.getPositionY() >=brick.getPositionY()+ brick.getHeight()/2&& ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth()) {    //make sound
+//            soundPool.play(sample1, 1, 1, 0, 0, 1);
+//            ball.moveDown();
+//            if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
+//                ball.moveRight();
+//            } else {
+//                ball.moveLeft();
+//            }
+//        }
+//        //from left
+//        if(ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX()+ball.getWidth() <= brick.getPositionX()+ brick.getWidth()/2&& ball.getPositionY()+ ball.getHeight()>= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY()+brick.getHeight()) {
+//            ball.moveLeft();
+//            soundPool.play(sample1, 1, 1, 0, 0, 1);
+//            if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
+//                ball.moveDown();
+//            } else {
+//                ball.moveUp();
+//            }
+//        }
+//        // from right
+//        if(ball.getPositionX() <= brick.getPositionX()+ brick.getWidth() && ball.getPositionX() > brick.getPositionX()+ brick.getWidth() && ball.getPositionY()+ ball.getHeight()>= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY()+brick.getHeight()) {
+//            ball.moveRight();
+//            soundPool.play(sample1, 1, 1, 0, 0, 1);
+//            if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
+//                ball.moveDown();
+//            } else {
+//                ball.moveUp();
+//            }
+//        }
+//        //update position of ball based on current direction
+//        ball.updatePosition();
+        for(int i=0;i<bricks.size();i++) {
+            collision(bricks.get(i));
         }
-        //from bottom
-        if(ball.getPositionY() <= brick.getPositionY()+ brick.getHeight() &&ball.getPositionY() >=brick.getPositionY()+ brick.getHeight()/2&& ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX()+brick.getWidth()) {    //make sound
-            soundPool.play(sample1, 1, 1, 0, 0, 1);
-            ball.moveDown();
-            if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
-                ball.moveRight();
-            } else {
-                ball.moveLeft();
-            }
-        }
-        //from left
-        if(ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX()+ball.getWidth() <= brick.getPositionX()+ brick.getWidth()/2&& ball.getPositionY()+ ball.getHeight()>= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY()+brick.getHeight()) {
-            ball.moveLeft();
-            soundPool.play(sample1, 1, 1, 0, 0, 1);
-            if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
-                ball.moveDown();
-            } else {
-                ball.moveUp();
-            }
-        }
-        // from right
-        if(ball.getPositionX() <= brick.getPositionX()+ brick.getWidth() && ball.getPositionX() > brick.getPositionX()+ brick.getWidth() && ball.getPositionY()+ ball.getHeight()>= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY()+brick.getHeight()) {
-            ball.moveRight();
-            soundPool.play(sample1, 1, 1, 0, 0, 1);
-            if(ball.getPositionY() < brick.getPositionY() + brick.getHeight()/2) {
-                ball.moveDown();
-            } else {
-                ball.moveUp();
-            }
-        }
-        //update position of ball based on current direction
-        ball.updatePosition();
-
     }
 
+    public void collision (Brick brick) {
+        if (!brick.isDestroyed()) {
+            if (ball.getPositionY() + ball.getWidth() >= brick.getPositionY() && ball.getPositionY() + ball.getWidth() <= brick.getPositionY() + brick.getHeight() / 2 && ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX() <= brick.getPositionX() + brick.getWidth()) {
+                soundPool.play(sample1, 1, 1, 0, 0, 1);
+                ball.moveUp();
+                brick.setDuration(brick.getDuration() - 1);
+                if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
+                    ball.moveRight();
+                } else {
+                    ball.moveLeft();
+                }
+            }
+            //from bottom
+            if (ball.getPositionY() <= brick.getPositionY() + brick.getHeight() && ball.getPositionY() >= brick.getPositionY() + brick.getHeight() / 2 && ball.getPositionX() + ball.getWidth() > brick.getPositionX() && ball.getPositionX() < brick.getPositionX() + brick.getWidth()) {    //make sound
+                soundPool.play(sample1, 1, 1, 0, 0, 1);
+                brick.setDuration(brick.getDuration() - 1);
+                ball.moveDown();
+                if (ball.getPositionX() > brick.getPositionX() + brick.getWidth() / 2) {
+                    ball.moveRight();
+                } else {
+                    ball.moveLeft();
+                }
+            }
+            //from left
+            if (ball.getPositionX() + ball.getWidth() >= brick.getPositionX() && ball.getPositionX() + ball.getWidth() <= brick.getPositionX() + brick.getWidth() / 2 && ball.getPositionY() + ball.getHeight() >= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY() + brick.getHeight()) {
+                ball.moveLeft();
+                soundPool.play(sample1, 1, 1, 0, 0, 1);
+                brick.setDuration(brick.getDuration() - 1);
+                if (ball.getPositionY() < brick.getPositionY() + brick.getHeight() / 2) {
+                    ball.moveDown();
+                } else {
+                    ball.moveUp();
+                }
+            }
+            // from right
+            if (ball.getPositionX() <= brick.getPositionX() + brick.getWidth() && ball.getPositionX() > brick.getPositionX() + brick.getWidth() && ball.getPositionY() + ball.getHeight() >= brick.getPositionY() && ball.getPositionY() <= brick.getPositionY() + brick.getHeight()) {
+                ball.moveRight();
+                soundPool.play(sample1, 1, 1, 0, 0, 1);
+                brick.setDuration(brick.getDuration() - 1);
+                if (ball.getPositionY() < brick.getPositionY() + brick.getHeight() / 2) {
+                    ball.moveDown();
+                } else {
+                    ball.moveUp();
+                }
+            }
+            //update position of ball based on current direction
+            ball.updatePosition();
+
+        }
+    }
 
     public void drawCourt() {
         if (ourHolder.getSurface().isValid()) {
@@ -285,14 +343,19 @@ class GameView extends SurfaceView implements Runnable{
             //Draw the ball
             ball.draw(canvas);
             //Draw the brick
-            brick.draw(canvas);
+            //brick.draw(canvas);
+            for(int i=0;i<bricks.size();i++) {
+                if(!bricks.get(i).isDestroyed()) {
+                    bricks.get(i).draw(canvas);
+                }
+            }
             ourHolder.unlockCanvasAndPost(canvas);
         }
     }
 
 
     public void controlFPS() {
-        long timeThisFrame = (System.currentTimeMillis() - lastFrameTime);
+        long  timeThisFrame = (System.currentTimeMillis() - lastFrameTime);
         long timeToSleep = 15 - timeThisFrame;
         if (timeThisFrame > 0) {
             fps = (int) (1000 / timeThisFrame);

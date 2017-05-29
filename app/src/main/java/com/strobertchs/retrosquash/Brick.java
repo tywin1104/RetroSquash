@@ -15,8 +15,25 @@ import android.graphics.Rect;
 
 public class Brick extends Sprite {
     private Bitmap bitmap;
+    private int duration;
+    private boolean destroyed;
+
+    public int getDuration() {
+        return duration;
+    }
+    public void setDuration( int d) {
+        duration = d;
+    }
+    public  boolean isDestroyed() {
+        return destroyed;
+    }
+    public void setDestroyed(boolean d) {
+        destroyed = d;
+    }
     public Brick(Context context, int screen_width){
         super();
+        duration = 5;
+        destroyed = false;
         setPositionX((int)(screen_width/+ (Math.random()*8+1)));
         setPositionY((int)(screen_width/(Math.random()*8+1)));
         setWidth((int)(screen_width/(Math.random()*14+1)));
