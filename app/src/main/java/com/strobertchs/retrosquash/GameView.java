@@ -345,9 +345,17 @@ class GameView extends SurfaceView implements Runnable{
             //Draw the brick
             //brick.draw(canvas);
             for(int i=0;i<bricks.size();i++) {
-                if(!bricks.get(i).isDestroyed()) {
-                    bricks.get(i).draw(canvas);
+                Brick current = bricks.get(i);
+                if(current.getDuration() <= 0) {
+                    current.setDestroyed(true);
+                    bricks.remove(current);
                 }
+                if(!current.isDestroyed()) {
+                    current.draw(canvas);
+                }
+            }
+            if(bricks.size()<3) {
+                bricks.add(new Brick(getContext(), screenWidth));
             }
             ourHolder.unlockCanvasAndPost(canvas);
         }
