@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.view.MotionEvent;
@@ -267,6 +268,10 @@ class GameView extends SurfaceView implements Runnable{
     public void drawCourt() {
         if (ourHolder.getSurface().isValid()) {
             canvas = ourHolder.lockCanvas();
+            //draw background
+            Drawable d = getResources().getDrawable(R.drawable.background);
+            d.setBounds(0,0,screenWidth,screenHeight);
+            d.draw(canvas);
 
             //Paint paint = new Paint();
             canvas.drawColor(Color.BLACK);//the background
