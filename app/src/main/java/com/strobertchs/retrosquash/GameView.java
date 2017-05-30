@@ -3,9 +3,13 @@ package com.strobertchs.retrosquash;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -16,6 +20,8 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static android.R.attr.bitmap;
 
 /**
  * Created by eric on 2017-05-08.
@@ -327,9 +333,12 @@ class GameView extends SurfaceView implements Runnable{
         if (ourHolder.getSurface().isValid()) {
             canvas = ourHolder.lockCanvas();
             //draw background
-            Drawable d = getResources().getDrawable(R.drawable.background);
-            d.setBounds(0,0,screenWidth,screenHeight);
-            d.draw(canvas);
+
+//            Drawable d = getResources().getDrawable(R.drawable.background);
+//            d.setBounds(0,0,600,600);
+//            d.draw(canvas);
+
+
 
             //Paint paint = new Paint();
             canvas.drawColor(Color.BLACK);//the background
