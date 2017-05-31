@@ -363,6 +363,7 @@ class GameView extends SurfaceView implements Runnable{
                     current.draw(canvas);
                 }
             }
+            //***
             if(bricks.size()<3) {
                 bricks.add(new Brick(getContext(), screenWidth));
             }
